@@ -1,8 +1,11 @@
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
+import dotenv from "dotenv";
 import userModel from "../models/userModel.js";
-const SECRET = "sometext";
+
+dotenv.config();
+const { SECRET_KEY } = process.env;
 
 const register = async (req, res) => {
   try {
@@ -67,7 +70,7 @@ const login = async (req, res) => {
           email: user.email,
           role: user.role,
         };
-        const token = jwt.sign(userObj, SECRET, { expiresIn: "1h" });
+        const token = jwt.sign(userObj, SECRET_KEY, { expiresIn: "1h" });
         res.status(200).json({ userObj, token });
       } else {
         res.status(400).json({ message: "Invalid password" });

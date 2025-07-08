@@ -17,11 +17,18 @@ const dbpass = encodeURIComponent(process.env.DBPASS);
 //   });
 
 mongoose
-  .connect(`mongodb+srv://${dbuser}:${dbpass}@cluster0.fxszwhs.mongodb.net/mernDB`)
+  .connect(
+    `mongodb+srv://${dbuser}:${dbpass}@cluster0.fxszwhs.mongodb.net/mernDB`
+  )
   .then(() => {
-    app.listen(8080, () => {
-      console.log("Server started");
-    });
+    console.log("Connected to DB...");
+  })
+  .catch((err) => {
+    console.log("Error connecting to DB: ", err);
   });
 app.use(express.json());
 app.use("/api/users", userRouter);
+
+app.listen(8080, () => {
+  console.log("Server running at PORT: 8080");
+});
