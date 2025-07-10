@@ -29,6 +29,7 @@ mongoose
     console.log("Error connecting to DB: ", err);
   });
 
+app.use(express.static("public"));
 app.use(cors());
 app.use(express.json());
 app.use("/api/users", userRouter);
