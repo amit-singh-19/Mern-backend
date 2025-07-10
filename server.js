@@ -20,7 +20,7 @@ const dbpass = encodeURIComponent(process.env.DBPASS);
 
 mongoose
   .connect(
-    `mongodb+srv://${dbuser}:${dbpass}@cluster0.fxszwhs.mongodb.net/mernDB?retryWrites=true&w=majority`
+    `mongodb+srv://${dbuser}:${dbpass}@cluster0.fxszwhs.mongodb.net/mernDB`
   )
   .then(() => {
     console.log("Connected to DB...");
