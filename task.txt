@@ -1,0 +1,13 @@
+User Model-
+{firstName, lastName, email, password, role, status}
+
+API Endpoints - 
+POST      /api/users/register       Register new users
+POST      /api/users/login          Authenticate and login new users
+GET       /api/users/:id/profile    Get logged-in user profile
+PATCH     /api/users/:id/profile    Update logged-in user profile
+PATCH     /api/users/:id/password   Change user password (with old password)
+GET       /api/users/               Get all users(admin only)
+GET       /api/users/:id            Get user by id
+PATCH     /api/users/:id            Update a user  (role, status, etc)
+DELETE    /api/users/:id            Delete a user

@@ -7,21 +7,17 @@ const authenticate = (req, res, next) => {
   try {
     let token = req.headers.authorization;
     token = token.split(" ")[1];
-    const user = jwt.verify(token, SECRET_KEY);
-    req.role = user.role;
+    const decoded = jwt.verify(token, SECRET_KEY);
+    req.user = decoded;
     next();
   } catch (err) {
     console.log(err);
     return res.json({ message: "Invalid Token" });
   }
 };
-const authorize = (role) => {
-  return (req, res, next) => {
-    if (role === req.role) {
-      next();
-    } else {
-      return res.json({ message: "Unauthorized access" });
-    }
-  };
-};
-export { authenticate, authorize };
+const isAdmin = (req, res, next) => {
+  if(req.user.role != 'admin')
+    return res.status(403).json({message: "Admin Only"})
+  next();
+}
+export { authenticate, isAdmin };
