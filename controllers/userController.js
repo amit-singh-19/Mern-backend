@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import userModel from "../models/userModel.js";
 
 dotenv.config();
-const SECRET_KEY = "mysecretkey";
+const { SECRET_KEY } = process.env;
 
 const registerUser = async (req, res) => {
   try {

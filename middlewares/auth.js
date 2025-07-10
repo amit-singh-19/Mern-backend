@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 dotenv.config();
-const SECRET_KEY = "mysecretkey";
+const { SECRET_KEY } = process.env;
 const authenticate = (req, res, next) => {
   try {
     let token = req.headers.authorization;
@@ -16,8 +16,8 @@ const authenticate = (req, res, next) => {
   }
 };
 const isAdmin = (req, res, next) => {
-  if(req.user.role != 'admin')
-    return res.status(403).json({message: "Admin Only"})
+  if (req.user.role != "admin")
+    return res.status(403).json({ message: "Admin Only" });
   next();
-}
+};
 export { authenticate, isAdmin };
