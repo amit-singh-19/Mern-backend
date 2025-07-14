@@ -7,22 +7,28 @@ import {
   updateProfile,
   updatePassword,
   showUsers,
+  addUser,
   getUserById,
   updateUser,
   deleteUser,
 } from "../controllers/userController.js";
 const Router = express.Router();
 
+//user routes
 Router.post("/register", registerUser);
 Router.post("/login", loginUser);
-
 Router.get("/:id/profile", authenticate, getProfile);
 Router.patch("/:id/profile", authenticate, updateProfile);
 Router.patch("/:id/password", authenticate, updatePassword);
 
-Router.get("/", authenticate, isAdmin, showUsers);
+
+//admin routes
+Router.get("/", showUsers);
+Router.post("/", addUser);
+// Router.get("/", authenticate, isAdmin, showUsers);
 Router.get("/:id", authenticate, isAdmin, getUserById);
 Router.patch("/:id", authenticate, isAdmin, updateUser);
-Router.delete("/:id", authenticate, isAdmin, deleteUser);
+// Router.delete("/:id", authenticate, isAdmin, deleteUser);
+Router.delete("/:id", deleteUser);
 
 export default Router;
