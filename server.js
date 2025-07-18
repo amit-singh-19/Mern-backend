@@ -3,7 +3,8 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import userRouter from "./routes/userRoute.js";
-// import productRouter from "./routes/productRoute.js";
+import productRouter from "./routes/productRoute.js";
+import orderRouter from "./routes/orderRoute.js";
 dotenv.config();
 
 const app = express();
@@ -33,7 +34,8 @@ mongoose
 app.use(cors());
 app.use(express.json());
 app.use("/api/users", userRouter);
-// app.use("/api/products", productRouter);
+app.use("/api/products", productRouter);
+app.use("/api/orders", orderRouter);
 
 app.listen(8080, () => {
   console.log("Server running at PORT: 8080");
