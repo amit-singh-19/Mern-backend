@@ -10,9 +10,11 @@ import {
 
 const Router = express.Router();
 
+//User
+Router.get("/all", displayProducts);
+
 //admin routes
 Router.get("/", showProducts);
-Router.get("/all", displayProducts);
 Router.post("/", addProduct);
 Router.get("/:id", getProduct);
 Router.patch("/:id", updateProduct);

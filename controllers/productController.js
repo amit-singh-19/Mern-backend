@@ -18,7 +18,7 @@ const deleteProduct = async (req, res) => {
     res.status(200).json(result);
   } catch (error) {
     console.log(error);
-    res.status(400).json({ message: "Something went wrong" });
+    res.status(500).json({ message: "Something went wrong" });
   }
 };
 
@@ -30,7 +30,7 @@ const updateProduct = async (req, res) => {
     res.status(200).json(result);
   } catch (error) {
     console.log(error);
-    res.status(400).json({ message: "Something went wrong" });
+    res.status(500).json({ message: "Something went wrong" });
   }
 };
 
@@ -41,7 +41,7 @@ const getProduct = async (req, res) => {
     res.status(200).json(result);
   } catch (err) {
     console.log(err);
-    res.status(400).json({ message: "Something went wrong" });
+    res.status(500).json({ message: "Something went wrong" });
   }
 };
 
