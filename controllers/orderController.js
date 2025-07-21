@@ -29,7 +29,7 @@ const showAllOrders = async (req, res) => {
     const count = await orderModel.countDocuments({ status: { $regex: status } });
     const total = Math.ceil(count / limit);
     const result = await orderModel
-      .find({ status: { $regex: status } })
+      .find({ status: { $regex: status,  $options: "i" } })
       .skip(skip)
       .limit(limit);
     res.status(200).json({ orders: result, total });

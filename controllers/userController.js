@@ -42,7 +42,8 @@ const loginUser = async (req, res) => {
           token,
           user: {
             id: existingUser.id,
-            name: existingUser.firstname + " " + existingUser.lastname,
+            firstname: existingUser.firstname,
+            lastname: existingUser.lastname,
             email: existingUser.email,
             role: existingUser.role,
           },
@@ -63,8 +64,8 @@ const getProfile = async (req, res) => {
   try {
     const id = req.params.id;
     const user = await userModel.findById(id);
-    // if (req.user.id !== user.id && req.user.role !== "admin")
-    //   res.status(403).json({ message: "Unauthorized" });
+    if (req.user.id !== user.id && req.user.role !== "admin")
+      res.status(403).json({ message: "Unauthorized" });
 
     res.status(200).json(user);
   } catch (error) {
@@ -76,8 +77,8 @@ const updateProfile = async (req, res) => {
   try {
     const id = req.params.id;
     console.log(id);
-    const {firstname, lastname, email} = req.body;
-    // if (req.user.id !== id) res.status(403).json({ message: "Unauthorized" });
+    const { firstname, lastname, email } = req.body;
+    if (req.user.id !== id) res.status(403).json({ message: "Unauthorized" });
     const userObj = {
       firstname,
       lastname,
@@ -86,7 +87,7 @@ const updateProfile = async (req, res) => {
     const updated = await userModel.findByIdAndUpdate(id, userObj, {
       new: true,
     });
-    res.status(200).json(updated);
+    res.status(200).json({ user: updated });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: err.message });
